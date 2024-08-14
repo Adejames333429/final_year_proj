@@ -1,16 +1,40 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:oau_bike_service/home.dart';
 import 'package:oau_bike_service/registration_page.dart';
+import 'package:oau_bike_service/repository/authentication_repository.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
+    LoginPage({super.key});
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
+  @override
+   void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+   }
+
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  void signIn() async {
+    print('email is ${emailController.text}');
+    print(passwordController.text);
+    print('password');
+    await AuthenticationRepository.instance.loginWithEmailAndPassword(
+      emailController.text, 
+      passwordController.text);
+    // await FirebaseAuth.instance.signInWithEmailAndPassword(
+    //   email: emailController.text, 
+    //   password: passwordController.text
+    // );
+  }
   int currentIndex = 0;
 
   void _onItemTapped(int index) {
@@ -23,12 +47,6 @@ class _LoginPageState extends State<LoginPage> {
       } else if (index == 1) {}
     });
   }
-
-
-  final _formfield = GlobalKey<FormState>();
-  final userController = TextEditingController();
-  final passController = TextEditingController();
-  bool passToggle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +119,14 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              controller:emailController,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
                               keyboardType: TextInputType.text,
                               decoration:  InputDecoration(
-                                prefixIcon: Icon(Icons.person, size: 15),
-                                hintText:'Enter your username',
+                                prefixIcon: Icon(Icons.email, size: 15),
+                                hintText:'Enter your email',
                                   hintStyle: TextStyle(fontSize: 12),
                                 suffixText: '(required)',
                                 suffixStyle: TextStyle(
@@ -128,7 +150,6 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.grey,  // Default border color
                                     width: 1,
                                   ),
-
                                 ),
                               ),
                            ),
@@ -153,6 +174,10 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              controller: passwordController,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               decoration:  InputDecoration(
@@ -201,23 +226,26 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(12)
                           )
                         ),
-                          onPressed: () {},
+                          onPressed: () {
+                           signIn();
+                          },
                           child: Text('Login',
                           style: TextStyle(
                             fontFamily: 'Momo',
                           ),
                           )),
                     ),
-                    SizedBox(height: 25.0),
+                    SizedBox(height: 20.0),
                     Row(
                       children: [
                         TextButton(onPressed: () {},
                             child: Text('Forgot Password?',
                             style: TextStyle(
                               color: Colors.blueGrey,
+                              fontSize: 13,
                             ),
                             )),
-                        SizedBox(width: 50),
+                        SizedBox(width: 70),
                         TextButton(onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                             return RegistrationPage();
@@ -226,6 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text('Create Account',
                               style: TextStyle(
                                 color: Colors.blueGrey,
+                                fontSize: 13,
                               ),
                             )),
         
