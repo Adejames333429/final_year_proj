@@ -10,6 +10,7 @@ class Dashboard extends StatelessWidget {
       appBar: AppBar(
         // backgroundColor: Colors.blueGrey[800],v  
         leading: Image.asset('images/oau_logo.jpg',
+        
         ),
         title: Text('OAUBIKES',
         style: TextStyle(
@@ -51,7 +52,7 @@ class Dashboard extends StatelessWidget {
                       ],
                     ),  
                     height: 120,
-                    width: 120,
+                    width: 130,
                     color: Colors.amber,
                   ),
                 ),
@@ -70,7 +71,7 @@ class Dashboard extends StatelessWidget {
                       ],
                     ),  
                     height: 120,
-                    width: 120,
+                    width: 130,
                     color: Colors.red,
                   ),
               ),
@@ -98,7 +99,7 @@ class Dashboard extends StatelessWidget {
                       ),
                     ),  
                     height: 120,
-                    width: 120,
+                    width: 130,
                     color: Colors.amber,
                   ),
                 ),
@@ -108,8 +109,8 @@ class Dashboard extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.book_outlined),
-                        Text("Place Order",
+                        Icon(Icons.location_on_rounded),
+                        Text("Locate BikeMan",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -117,7 +118,7 @@ class Dashboard extends StatelessWidget {
                       ],
                     ),  
                     height: 120,
-                    width: 120,
+                    width: 130,
                     color: Colors.red,
                   ),
               ),

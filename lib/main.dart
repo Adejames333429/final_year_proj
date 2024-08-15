@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:oau_bike_service/animated_onboarding_screen.dart';
 import 'package:oau_bike_service/customers_profile.dart';
 import 'package:oau_bike_service/dashboard.dart';
+import 'package:oau_bike_service/place_order.dart';
 import 'package:oau_bike_service/registration_page.dart';
 import 'package:oau_bike_service/repository/authentication_repository.dart';
 import 'controllers/registration_controller.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CustomersProfile(),
+      home: PlaceOrder(),
       // home: Home(),
     );
   }
